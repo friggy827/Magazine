@@ -7,9 +7,8 @@
     <style>
         :root { --w: 450px; --h: 600px; --speed: 0.8s; }
         
-        /* Main Background set to Black */
         body { 
-            background: #6d6a6a; 
+            background: #000; 
             display: flex; 
             justify-content: center; 
             align-items: center; 
@@ -39,16 +38,13 @@
             position: absolute; width: 100%; height: 100%; 
             backface-visibility: hidden !important; 
             -webkit-backface-visibility: hidden !important; 
-            background: #ffffff; /* Pages remain White */
+            background: #ffffff; 
             display: flex; align-items: flex-end; 
             padding: 30px; box-sizing: border-box;
-            /* Darker border for contrast against black bg */
             border: 1px solid #ccc;
-            /* Stronger shadow so pages look like they are floating */
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
-        /* Spine shadow gradients for the white paper "fold" */
         .front::after {
             content: ''; position: absolute; top: 0; left: 0; width: 40px; height: 100%;
             background: linear-gradient(to right, rgba(0,0,0,0.1), transparent);
@@ -61,7 +57,6 @@
         .front { z-index: 2; transform: translateZ(0.5px); }
         .back { transform: rotateY(180deg) translateZ(0.5px); }
 
-        /* Darker Gray Page Numbers for visibility on white */
         .num { 
             position: relative; z-index: 10; color: #777; 
             font-size: 13px; letter-spacing: 1px; font-weight: bold; 
