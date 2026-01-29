@@ -3,9 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>White Magazine on Black BG</title>
+    <title>Proportional Mobile Magazine</title>
     <style>
-        :root { --w: 450px; --h: 600px; --speed: 0.8s; }
+        :root { 
+            --w: 450px; 
+            --h: 600px; /* 3:4 Aspect Ratio */
+            --speed: 0.8s; 
+        }
         
         body { 
             background: #000; 
@@ -48,11 +52,11 @@
 
         .front::after {
             content: ''; position: absolute; top: 0; left: 0; width: 40px; height: 100%;
-            background: linear-gradient(to right, rgba(0,0,0,0.1), transparent);
+            background: linear-gradient(to right, rgba(0,0,0,0.05), transparent);
         }
         .back::after {
             content: ''; position: absolute; top: 0; right: 0; width: 40px; height: 100%;
-            background: linear-gradient(to left, rgba(0,0,0,0.1), transparent);
+            background: linear-gradient(to left, rgba(0,0,0,0.05), transparent);
         }
 
         .front { z-index: 2; transform: translateZ(0.5px); }
@@ -67,14 +71,13 @@
 
         #p1 { z-index: 5; } #p2 { z-index: 4; } #p3 { z-index: 3; } #p4 { z-index: 2; } #p5 { z-index: 1; }
 
-        /* MOBILE SPECIFIC FIX */
+        /* FIXED MOBILE ASPECT RATIO */
         @media (max-width: 768px) {
             :root { 
-                --w: 42vw; /* Smaller width to allow for 2-page spread */
-                --h: 50vh; 
+                --w: 42vw; 
+                --h: calc(42vw * 1.4); /* Maintains the 1:1.4 magazine ratio */
             }
             .book {
-                /* Start slightly shifted left so the open book is centered */
                 left: -21vw; 
             }
             .front, .back { padding: 15px; }
@@ -115,7 +118,6 @@
 
         if (pageIndex === 1) {
             if (page.classList.contains('flipped')) {
-                // On mobile, we move it enough to show both sides
                 book.style.transform = isMobile ? "translateX(42vw)" : "translateX(50%)";
             } else {
                 book.style.transform = "translateX(0%)";
