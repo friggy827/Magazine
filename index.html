@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>White Magazine on Black BG</title>
     <style>
         :root { --w: 450px; --h: 600px; --speed: 0.8s; }
@@ -16,7 +16,8 @@
             margin: 0; 
             perspective: 2000px; 
             font-family: sans-serif; 
-            overflow: hidden; 
+            overflow: hidden;
+            touch-action: manipulation;
         }
         
         .book { 
@@ -65,6 +66,12 @@
         .page.flipped { transform: rotateY(-180deg); }
 
         #p1 { z-index: 5; } #p2 { z-index: 4; } #p3 { z-index: 3; } #p4 { z-index: 2; } #p5 { z-index: 1; }
+
+        @media (max-width: 500px) {
+            :root { --w: 80vw; --h: 60vh; }
+            .book { transform: scale(0.9); }
+            .front, .back { padding: 15px; }
+        }
     </style>
 </head>
 <body>
@@ -99,7 +106,7 @@
 
         if (pageIndex === 1) {
             if (page.classList.contains('flipped')) {
-                book.style.transform = "translateX(50%)";
+                book.style.transform = "translateX(40%)";
             } else {
                 book.style.transform = "translateX(0%)";
             }
@@ -117,6 +124,8 @@
             }
         });
     }
+
+    document.addEventListener('touchstart', function(){}, {passive: true});
 </script>
 
 </body>
