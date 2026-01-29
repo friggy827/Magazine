@@ -67,10 +67,18 @@
 
         #p1 { z-index: 5; } #p2 { z-index: 4; } #p3 { z-index: 3; } #p4 { z-index: 2; } #p5 { z-index: 1; }
 
-        @media (max-width: 500px) {
-            :root { --w: 80vw; --h: 60vh; }
-            .book { transform: scale(0.9); }
+        /* MOBILE SPECIFIC FIX */
+        @media (max-width: 768px) {
+            :root { 
+                --w: 42vw; /* Smaller width to allow for 2-page spread */
+                --h: 50vh; 
+            }
+            .book {
+                /* Start slightly shifted left so the open book is centered */
+                left: -21vw; 
+            }
             .front, .back { padding: 15px; }
+            .num { font-size: 10px; }
         }
     </style>
 </head>
@@ -102,11 +110,13 @@
 <script>
     function handleFlip(page, pageIndex) {
         const book = document.getElementById('book');
+        const isMobile = window.innerWidth <= 768;
         page.classList.toggle('flipped');
 
         if (pageIndex === 1) {
             if (page.classList.contains('flipped')) {
-                book.style.transform = "translateX(40%)";
+                // On mobile, we move it enough to show both sides
+                book.style.transform = isMobile ? "translateX(42vw)" : "translateX(50%)";
             } else {
                 book.style.transform = "translateX(0%)";
             }
@@ -124,8 +134,6 @@
             }
         });
     }
-
-    document.addEventListener('touchstart', function(){}, {passive: true});
 </script>
 
 </body>
